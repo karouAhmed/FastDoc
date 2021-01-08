@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text class="fw700" color="light">Notification</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="deleteNotifications()" [disabled]="disable" color="medium"
+                        shape="round"
+                        size="small">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <div *ngIf="!isLoading && notification.length==0">
+        <ion-item>
+            <ion-icon name="sad"></ion-icon>
+            <ion-text padding>Aucune notification</ion-text>
+        </ion-item>
+    </div>
+    <ng-container *ngIf="isLoading">
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+        <div *ngFor=" let n of [0,1,2,3]
+    " padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+                <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+        </div>
+    </ng-container>
+    <ion-card (click)="showDetails(not)" *ngFor="let not of notification" [ngClass]="{'vu' : !not.vu}" color="medium">
+        <ion-card-header>
+            <ion-item>
+                <ion-icon name="notifications"></ion-icon>
+                <ion-label> {{not.Text}}</ion-label>
+            </ion-item>
+        </ion-card-header>
+        <ion-card-content align-items-center class="offer-details">
+
+            <ion-icon color="primary" name="calendar"></ion-icon>
+            <ion-text class="space-left" color="tertiary">{{
+                not.debut| date:'MMM d, y, HH:mm'
+                }}</ion-text>
+            <span class="space-left"><ion-icon name="arrow-forward"></ion-icon></span>
+            <ion-icon class="space-left" color="primary" name="calendar"></ion-icon>
+            <ion-text class="space-left" color="tertiary">{{
+                not.fin | date :'MMM d, y, HH:mm'
+                }}</ion-text>
+
+        </ion-card-content>
+        <div padding-end text-right>
+            <ion-note slot="end">{{not.p | date :'EEEE, à HH:mm' :'': 'fr-FR'}}</ion-note>
+        </div>
+    </ion-card>
+
+</ion-content>

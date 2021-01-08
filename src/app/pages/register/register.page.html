@@ -1,0 +1,185 @@
+<ion-content class="login auth-page" padding>
+
+    <div class="auth-content">
+        <!-- Logo -->
+        <div padding-horizontal text-center>
+            <div class="logo"></div>
+            <h3 no-margin>
+                <ion-text class="fw700" color="light">
+                    <ion-text color="secondary">Register</ion-text>
+                </ion-text>
+            </h3>
+        </div>
+
+        <!-- Register form -->
+        <form [formGroup]="onRegisterForm" class="list-form">
+
+            <!-- Full Name -->
+            <ion-item class="animated fadeInUp" no-padding>
+                <ion-label position="floating">
+                    <ion-icon item-start name="contact"></ion-icon>
+                    Nom complet
+                </ion-label>
+                <ion-input color="secondary" formControlName="fullName" type="text"></ion-input>
+            </ion-item>
+            <p *ngIf="onRegisterForm.get('fullName').touched && onRegisterForm.get('fullName').hasError('required')"
+               class="text08"
+               ion-text>
+                <ion-text color="warning">
+                    Ce champ est requis
+                </ion-text>
+            </p>
+
+            <!-- Mail -->
+            <ion-item class="animated fadeInUp" no-padding>
+                <ion-label position="floating">
+                    <ion-icon item-start name="mail"></ion-icon>
+                    Email
+                </ion-label>
+                <ion-input color="secondary" formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <p *ngIf="onRegisterForm.get('email').touched && onRegisterForm.get('email').hasError('required')"
+               class="text08"
+               ion-text>
+                <ion-text color="warning">
+                    Ce champ est requis
+                </ion-text>
+            </p>
+
+            <!-- PhoneNumber -->
+            <ion-item class="animated fadeInUp" no-padding>
+                <ion-label position="floating">
+                    <ion-icon item-start name="call"></ion-icon>
+                    Numéro de téléphone
+                </ion-label>
+                <ion-input color="secondary" formControlName="telephone" minlength="6" type="tel"></ion-input>
+            </ion-item>
+            <p *ngIf="onRegisterForm.get('telephone').touched && onRegisterForm.get('telephone').hasError('required')"
+               class="text08"
+               ion-text>
+                <ion-text color="warning">
+                    Ce champ est requis
+                </ion-text>
+            </p>
+
+            <!-- Password -->
+            <ion-item class="animated fadeInUp" no-padding>
+                <ion-label position="floating">
+                    <ion-icon item-start name="lock"></ion-icon>
+                    Mot de passe
+                </ion-label>
+                <ion-input color="secondary" formControlName="password" type="password"></ion-input>
+            </ion-item>
+            <p *ngIf="onRegisterForm.get('password').touched && onRegisterForm.get('password').hasError('required')"
+               class="text08" color="warning"
+               ion-text>
+                <ion-text color="warning">
+                    Ce champ est requis
+                </ion-text>
+            </p>
+        </form>
+
+        <!-- Offrir service -->
+        <div class="list-form">
+            <ion-item class="animated fadeInUp" no-padding>
+                <ion-checkbox [(ngModel)]="serve" checked="false" color="light" slot="start"></ion-checkbox>
+                <ion-label>Offrir service</ion-label>
+            </ion-item>
+            <div *ngIf="serve" no-padding>
+                <!-- Offrir service / profession -->
+                <ion-item class="animated fadeInUp" no-padding>
+                    <ion-label>
+                        <ion-icon item-start name="briefcase"></ion-icon>
+                        Profession
+                    </ion-label>
+                    <ion-select [(ngModel)]="sproffession" cancelText="retour" class="animated fadeInUp" okText="Okay"
+                                placeholder="choisir un"
+                                required>
+                        <ion-select-option *ngFor="let sproffession of profession"
+                                           [value]="sproffession">{{sproffession}}</ion-select-option>
+
+                    </ion-select>
+                </ion-item>
+                <!-- Offrir service / Localisation -->
+                <ion-item class="animated fadeInUp" no-padding>
+                    <ion-label>
+                        <ion-icon item-start name="pin"></ion-icon>
+                        Localisation
+                    </ion-label>
+
+                    <ion-select (ionChange)="setDistrictValues(sState)" [(ngModel)]="sState" cancelText="retour"
+                                class="animated fadeInUp" okText="Okay" placeholder="Gouvernement" required>
+                        <ion-select-option *ngFor="let sState of states"
+                                           [value]="sState">{{sState.name}}</ion-select-option>
+                    </ion-select>
+
+
+                    <ion-select [(ngModel)]="sDistrict" cancelText="retour" class="animated fadeInUp" okText="Okay"
+                                placeholder="Ville" required>
+                        <ion-select-option *ngFor="let sDistrict of sDis " [value]="sDistrict">{{sDistrict}}
+
+                        </ion-select-option>
+                    </ion-select>
+
+                </ion-item>
+                <ion-item class="animated fadeInUp" no-padding>
+                    <ion-label>
+                        <ion-icon item-start name="locate"></ion-icon>
+                        Adresse
+                    </ion-label>
+                    <ion-input [(ngModel)]="adresse" color="secondary" required type="text"></ion-input>
+                </ion-item>
+
+            </div>
+        </div>
+
+
+        <!-- Signup -->
+        <div margin-top>
+            <ion-button (click)="signUp()" [disabled]="!onRegisterForm.valid" color="dark" expand="full" icon-left
+                        shape="round"
+                        size="medium"
+                        tappable>
+                <ion-icon name="log-in"></ion-icon>
+                S'inscrire
+            </ion-button>
+
+            <p text-center>
+                <ion-text color="light">
+                    Ou s'inscrire avec:
+                </ion-text>
+            </p>
+
+            <ion-grid class="btn-group">
+                <ion-row>
+                    <ion-col size="4">
+                        <ion-button color="tertiary" expand="full" fill="outline" shape="round">
+                            <ion-icon name="logo-facebook" slot="icon-only"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-button color="tertiary" expand="full" fill="outline" shape="round">
+                            <ion-icon name="logo-twitter" slot="icon-only"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="4">
+                        <ion-button color="tertiary" expand="full" fill="outline" shape="round">
+                            <ion-icon name="logo-googleplus" slot="icon-only"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </div>
+
+        <!-- Other links -->
+        <div margin-top text-center>
+      <span (click)="goToLogin()" tappable>
+        <ion-text color="light">
+          <strong>J'ai un compte!</strong>
+        </ion-text>
+      </span>
+        </div>
+
+    </div>
+</ion-content>

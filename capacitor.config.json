@@ -1,0 +1,7 @@
+{
+  "appId": "com.pfe.com",
+  "appName": "pfe",
+  "bundledWebRuntime": false,
+  "webDir": "www",
+  "npmClient": "npm"
+}

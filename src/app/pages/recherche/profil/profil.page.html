@@ -1,0 +1,126 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Profil prestataire</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile">
+    <ion-card *ngIf="!hideprofil" no-margin>
+        <ion-card-content class="bg-profile">
+            <img alt="" src="assets/img/profil.png">
+            <h1 class="fw500">{{profil?.nom}}</h1>
+            <h2 color="light" margin-bottom>{{prestataireProfil?.profession}}</h2>
+            <rating [(ngModel)]="rate"
+                    readonly="true"
+                    size="default">
+            </rating>
+            <p>({{numberRatings}}) évaluations</p>
+        </ion-card-content>
+
+        <ion-grid fixed no-padding>
+            <ion-row>
+                <ion-col padding size="12">
+
+                    <ion-list margin-bottom>
+                        <ion-list-header color="light">
+                            <ion-label class="fw700">Plus d'information</ion-label>
+                        </ion-list-header>
+
+                        <ion-item-group>
+                            <ion-item-divider>
+                                <ion-label>Contact</ion-label>
+                            </ion-item-divider>
+                            <ion-item>
+                                <ion-label color="dark">Email:</ion-label>
+                                <p>{{profil?.email}}</p>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label color="dark">Numéro de téléphone:</ion-label>
+                                <p>{{profil?.telephone}}</p>
+                            </ion-item>
+
+                        </ion-item-group>
+                        <ion-item-group>
+                            <ion-item-divider>
+                                <ion-label>Loacalisation</ion-label>
+                            </ion-item-divider>
+                            <ion-item>
+                                <ion-label color="dark">Gouvernement:</ion-label>
+                                <p>{{prestataireProfil.gouvernement}}</p>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label color="dark">Ville:</ion-label>
+                                <p>{{prestataireProfil.ville}}</p>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label color="dark">Adresse:</ion-label>
+                                <p>{{prestataireProfil.adresse}}</p>
+                            </ion-item>
+                        </ion-item-group>
+                    </ion-list>
+
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-button (click)="hideprofil=!hideprofil" color="dark" expand="full" no-margin size="large">Réserver
+        </ion-button>
+
+    </ion-card>
+    <ion-item-group *ngIf="hideprofil" class="car">
+        <ion-item-divider>
+            <h2>Confirmer la réservation</h2>
+        </ion-item-divider>
+        <ion-item>
+            <ion-label>
+                <ion-icon name="person"></ion-icon>
+                Nom pation :
+            </ion-label>
+            <ion-input [(ngModel)]="reservation.title" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                <ion-icon name="bed"></ion-icon>
+                Description :
+            </ion-label>
+            <ion-input [(ngModel)]="reservation.desc" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                <ion-icon name="call"></ion-icon>
+                Numéro de téléphone:
+            </ion-label>
+            <ion-input [(ngModel)]="reservation.telephone" type="tel"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                <ion-icon name="time"></ion-icon>
+                Debut :
+            </ion-label>
+            <p>{{prestataireProfil.startTime | date:"MMM d, y, HH:mm"}}</p>
+        </ion-item>
+        <ion-item>
+            <ion-label>
+                <ion-icon name="time"></ion-icon>
+                Fin :
+            </ion-label>
+            <p>{{prestataireProfil.endTime | date:"MMM d, y, HH:mm"}}</p>
+
+        </ion-item>
+        <ion-item>
+            <ion-button (click)="hideprofil=!hideprofil" expand="block" fill="outline" slot="end">
+                <ion-icon
+                        name="close-circle-outline"></ion-icon>
+                Annuler
+            </ion-button>
+            <ion-button (click)="reserver()" [disabled]="reservation.desc==''" expand="block" slot="end">
+                <ion-icon name="save"></ion-icon>
+                Confirmer
+            </ion-button>
+        </ion-item>
+    </ion-item-group>
+
+
+</ion-content>

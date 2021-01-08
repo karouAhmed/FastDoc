@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text class="fw700" color="light">Reservation</ion-text>
+            </ion-text>
+        </ion-title>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <div *ngIf="!isLoading && reservations.length == 0">
+        <ion-item>
+            <ion-icon name="sad"></ion-icon>
+            <ion-text padding> Aucun réservations</ion-text>
+        </ion-item>
+    </div>
+    <ng-container *ngIf="isLoading">
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+        <div *ngFor=" let n of [0,1,2,3]
+    " padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+                <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+        </div>
+    </ng-container>
+    <div *ngIf="!isLoading">
+        <ion-card *ngFor="let res of reservations">
+            <ion-card-header>
+                <ion-item>
+                    <ion-icon name="briefcase" padding></ion-icon>
+                    <ion-label> {{res.profession}}</ion-label>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content align-items-center>
+
+                <ion-icon color="primary" name="calendar"></ion-icon>
+                <ion-text class="space-left" color="tertiary">{{
+                    res.startTime| date:'MMM d, y, HH:mm'
+                    }}</ion-text>
+                <span class="space-left"><ion-icon name="arrow-forward"></ion-icon></span>
+                <ion-icon class="space-left" color="primary" name="calendar"></ion-icon>
+                <ion-text class="space-left" color="tertiary">{{
+                    res.endTime | date :'MMM d, y, HH:mm'
+                    }}</ion-text>
+
+            </ion-card-content>
+            <div text-right>
+                <ion-button (click)="showDetails(res)"
+                            color="secondary"
+                            fill="clear"
+                            slot="end"
+                >
+                    Plus de détails
+                </ion-button>
+            </div>
+        </ion-card>
+    </div>
+</ion-content>

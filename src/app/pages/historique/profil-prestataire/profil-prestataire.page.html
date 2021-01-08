@@ -1,0 +1,106 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Profile prestataire</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="profile">
+    <ng-container *ngIf="isLoading">
+        <div *ngFor=" let n of [0,1,2,3]
+    " padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+                <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+        </div>
+    </ng-container>
+    <ion-card *ngIf="!isLoading" no-margin>
+        <ion-card-content class="bg-profile">
+            <img alt="" src="assets/img/profil.png">
+            <h1 class="fw500">{{prestataireProfil?.nom}}</h1>
+            <h2 color="light" margin-bottom>{{service?.profession}}</h2>
+            <rating [(ngModel)]="rate"
+                    readonly="true"
+                    size="default">
+            </rating>
+            <p>({{numbreRatings}}) évaluations</p>
+        </ion-card-content>
+
+        <ion-grid fixed no-padding>
+            <ion-row>
+                <ion-col padding size="12">
+
+                    <ion-list margin-bottom>
+                        <ion-list-header color="light">
+                            <ion-label class="fw700">Plus d'information</ion-label>
+                        </ion-list-header>
+
+                        <ion-item-group>
+                            <ion-item-divider>
+                                <ion-label>Contact</ion-label>
+                            </ion-item-divider>
+                            <ion-item>
+                                <ion-label color="dark">Email:</ion-label>
+                                <p>{{prestataireProfil?.email}}</p>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label color="dark">Numéro de téléphone:</ion-label>
+                                <p>{{prestataireProfil?.telephone}}</p>
+                            </ion-item>
+
+                        </ion-item-group>
+                        <ion-item-group>
+                            <ion-item-divider>
+                                <ion-label>Loacalisation</ion-label>
+                            </ion-item-divider>
+                            <ion-item>
+                                <ion-label color="dark">Gouvernement:</ion-label>
+                                <p>{{service?.gouvernement}}</p>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label color="dark">Ville:</ion-label>
+                                <p>{{service?.ville}}</p>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label color="dark">Adresse:</ion-label>
+                                <p>{{service?.adresse}}</p>
+                            </ion-item>
+                        </ion-item-group>
+
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+            <ion-row padding-start>
+                <ion-col offsetMd="3" sizeMd="6">
+                    <ion-label>
+                        <ion-icon item-start name="happy"></ion-icon>
+                        <ion-text>
+                            Cliquer pour noter
+                        </ion-text>
+                    </ion-label>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col offsetMd="3" sizeMd="6">
+                    <rating [(ngModel)]="rateB"
+                            readonly="false"
+                            size="default"
+                    >
+                    </rating>
+                </ion-col>
+            </ion-row>
+            <ion-row padding-bottom>
+                <ion-col align-self-end sizeMd="6">
+                    <div margin-vertical text-right>
+                        <ion-button (click)="Confirmer()" expand="block">Confirmer
+                        </ion-button>
+                    </div>
+                </ion-col>
+            </ion-row>
+
+        </ion-grid>
+
+    </ion-card>
+</ion-content>

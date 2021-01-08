@@ -1,0 +1,138 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button [defaultHref]="default"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text class="fw700" color="light">Historique</ion-text>
+            </ion-text>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="deleteHistory()"
+                        [disabled]="disable"
+                        color="medium"
+                        shape="round"
+                        size="small">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ng-container *ngIf="isLoading ">
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+        <div *ngFor=" let n of [0,1,2,3]
+    " padding>
+            <ion-skeleton-text></ion-skeleton-text>
+            <p>
+                <ion-skeleton-text class="fake-skeleton"></ion-skeleton-text>
+            </p>
+        </div>
+    </ng-container>
+
+    <div *ngIf="isClient&&!isLoading">
+
+        <ion-card *ngFor="let res of reservations">
+            <ion-card-header>
+                <ion-item>
+                    <ion-icon name="briefcase" padding></ion-icon>
+                    <ion-label> {{res.profession}}</ion-label>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content align-items-center>
+                <!--  <div class="offer-details">
+                      <ion-icon color="primary" name="calendar"></ion-icon>
+                      <ion-text class="space-left" color="tertiary">{{
+                          res.startTime| date:'MMM d, y, HH:mm'
+                          }}</ion-text>
+                      <span class="space-left"><ion-icon name="arrow-forward"></ion-icon></span>
+                      <ion-icon class="space-left" color="primary" name="calendar"></ion-icon>
+                      <ion-text class="space-left" color="tertiary">{{
+                          res.endTime | date :'MMM d, y, HH:mm'
+                          }}</ion-text>
+                  </div>-->
+
+                <p *ngIf="res.statut=='CC'">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                    Statut : Annulé par vous
+                </p>
+                <p *ngIf="res.statut=='CP'">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                    Statut : Annulé par le prestataire
+                </p>
+
+            </ion-card-content>
+            <div text-right>
+                <ion-button (click)="showProfile(res)"
+                            color="secondary"
+                            fill="clear"
+                            slot="end"
+                >
+                    Plus de détails
+                </ion-button>
+            </div>
+        </ion-card>
+        <div *ngIf="!isLoading && reservations.length < 1">
+            <ion-item>
+                <ion-icon name="sad"></ion-icon>
+                <ion-text padding> Aucune réservation !!!</ion-text>
+            </ion-item>
+        </div>
+    </div>
+    <div *ngIf="!isClient&&!isLoading">
+        <div *ngIf="!isLoading && (rdvs.length < 1||!rdvs)">
+            <ion-item>
+                <ion-icon name="sad"></ion-icon>
+                <ion-text padding> Aucun rendez-vous !!!</ion-text>
+            </ion-item>
+        </div>
+        <ion-card *ngFor="let rdv of rdvs">
+            <ion-card-header>
+                <ion-item>
+                    <ion-icon name="briefcase" padding></ion-icon>
+                    <ion-label> {{rdv.title}}</ion-label>
+                </ion-item>
+            </ion-card-header>
+            <ion-card-content>
+                <div class="offer-details">
+                    <ion-icon color="primary" name="calendar"></ion-icon>
+                    <ion-text class="space-left" color="tertiary">{{
+                        rdv.startTime| date:'MMM d, y, HH:mm'
+                        }}</ion-text>
+                    <span class="space-left"><ion-icon name="arrow-forward"></ion-icon></span>
+                    <ion-icon class="space-left" color="primary" name="calendar"></ion-icon>
+                    <ion-text class="space-left" color="tertiary">{{
+                        rdv.endTime | date :'MMM d, y, HH:mm'
+                        }}</ion-text>
+                </div>
+                <p slot="start">
+                    <ion-text>
+                        <ion-icon name="call"></ion-icon>
+                        Numéro de téléphone:{{rdv.telephone}}
+                    </ion-text>
+                <p>
+                <p>
+                    <ion-text>
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                        Description:{{rdv.desc}}
+                    </ion-text>
+                </p>
+                <p *ngIf="rdv.statut=='CC'">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                    Statut : Annulé par le client
+                </p>
+                <p *ngIf="rdv.statut=='CP'">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                    Statut : Annulé par vous
+                </p>
+
+            </ion-card-content>
+        </ion-card>
+
+    </div>
+</ion-content>

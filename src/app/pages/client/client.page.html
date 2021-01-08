@@ -1,0 +1,23 @@
+<ion-tabs>
+
+    <ion-tab-bar slot="bottom">
+
+        <ion-tab-button tab="recherche">
+            <ion-icon name="search"></ion-icon>
+            <ion-label>recherche</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="reservation">
+            <ion-icon name="list-box"></ion-icon>
+            <ion-label>Reservation</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="notification">
+            <ion-badge *ngIf="badge>0" color="danger">{{badge}}</ion-badge>
+            <ion-icon name="notifications-outline"></ion-icon>
+            <ion-label>Notifications</ion-label>
+        </ion-tab-button>
+
+    </ion-tab-bar>
+
+</ion-tabs>

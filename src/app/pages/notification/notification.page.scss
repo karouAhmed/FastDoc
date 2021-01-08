@@ -1,0 +1,22 @@
+:host {
+  ion-content {
+    --background: linear-gradient(-135deg, var(--ion-color-medium), var(--ion-color-light))
+  }
+
+  .fake-skeleton {
+    width: 60%;
+  }
+
+  .offer-details {
+    display: flex;
+    align-items: center;
+
+    .space-left {
+      margin-left: 5px;
+    }
+  }
+
+  .vu {
+    background: #989aa2;
+  }
+}

@@ -1,0 +1,111 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text class="fw700" color="light">Personnaliser</ion-text>
+            </ion-text>
+        </ion-title>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-card no-padding>
+        <ion-card-header>
+            <ion-card-title>
+                Modifier horaire
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item no-padding>
+                <ion-label>
+                    <ion-icon item-start name="speedometer"></ion-icon>
+                    Nombre de prestation par jour :
+                </ion-label>
+                <ion-select [(ngModel)]="nbPrestations" cancelText="retour" okText="Okay" placeholder="Choisir">
+                    <ion-select-option *ngFor="let nbPrestations of Nb"
+                                       [value]="nbPrestations">{{nbPrestations}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item no-padding>
+                <ion-label>
+                    <ion-icon item-start name="clock"></ion-icon>
+                    Horaire de travail
+                </ion-label>
+                <ion-select [(ngModel)]="heureDebut" cancelText="retour" okText="Okay" placeholder="Debut">
+                    <ion-select-option *ngFor="let heureDebut of heure"
+                                       [value]="heureDebut">{{heureDebut}}</ion-select-option>
+                </ion-select>
+                <ion-icon name="arrow-dropright"></ion-icon>
+                <ion-select [(ngModel)]="heureFin" cancelText="retour" okText="Okay" placeholder="Fin">
+                    <ion-select-option *ngFor="let heureFin of heure"
+                                       [value]="heureFin">{{heureFin}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item no-padding>
+                <ion-label>
+                    <ion-icon item-start name="hourglass"></ion-icon>
+                    Durée de prestation
+                </ion-label>
+
+                <ion-select [(ngModel)]="dureePrestation" cancelText="retour" okText="Okay" placeholder="Choisir une">
+                    <ion-select-option *ngFor="let dureePrestation of Duree"
+                                       [value]="dureePrestation">{{dureePrestation}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-button (click)="updateConstraints()" expand="block" slot="end">
+                    <ion-icon name="create"></ion-icon>
+                    Modifier
+                </ion-button>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+    <ion-card no-padding>
+        <ion-card-header>
+            <ion-card-title>
+                Modifier prestation
+            </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item no-padding>
+                <ion-label>
+                    <ion-icon item-start name="pin"></ion-icon>
+                    Localisation
+                </ion-label>
+
+                <ion-select (ionChange)="setDistrictValues(sState)" [(ngModel)]="sState"
+                            cancelText="retour" okText="Okay" placeholder="Gouvernement">
+                    <ion-select-option *ngFor="let sState of states"
+                                       [value]="sState">{{sState.name}}</ion-select-option>
+                </ion-select>
+
+
+                <ion-select [(ngModel)]="sDistrict" cancelText="retour"
+                            okText="Okay" placeholder="Ville">
+                    <ion-select-option *ngFor="let sDistrict of sDis " [value]="sDistrict">{{sDistrict}}
+
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+            <ion-item no-padding>
+                <ion-label>
+                    <ion-icon item-start name="locate"></ion-icon>
+                    Adresse
+                </ion-label>
+                <ion-input [(ngModel)]="adresse" color="secondary" type="email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-button (click)="updateService()" expand="block" slot="end">
+                    <ion-icon name="create"></ion-icon>
+                    Modifier
+                </ion-button>
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-tabs>
+
+    <ion-tab-bar slot="bottom">
+
+        <ion-tab-button tab="calendrier">
+            <ion-icon name="Calendar"></ion-icon>
+            <ion-label>Calendrier</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="personnalisation">
+            <ion-icon name="cog"></ion-icon>
+            <ion-label>Personnalisation</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="notification">
+            <ion-badge *ngIf="badge>0" color="danger">{{badge}}</ion-badge>
+            <ion-icon name="notifications-outline"></ion-icon>
+            <ion-label>Notifications</ion-label>
+        </ion-tab-button>
+
+    </ion-tab-bar>
+
+</ion-tabs>

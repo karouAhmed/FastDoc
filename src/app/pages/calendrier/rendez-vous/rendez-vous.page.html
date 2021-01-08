@@ -1,0 +1,76 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button color="secondary" defaultHref="/home/calendrier"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text class="fw700" color="light">Render-vous</ion-text>
+            </ion-text>
+        </ion-title>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Rendez-Vous</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-item>
+                <ion-label>
+                    <ion-icon item-start name="contact"></ion-icon>
+                    Nom patient :
+                </ion-label>
+                <p>
+                    {{rdv.title}}
+                </p></ion-item>
+            <ion-item>
+                <ion-label>
+                    <ion-icon item-start name="clipboard"></ion-icon>
+                    Description :
+                </ion-label>
+                <p>{{rdv.desc}}</p>
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <ion-icon name="call"></ion-icon>
+                    Numéro de téléphone:
+                </ion-label>
+                <p>{{rdv.telephone}}</p>
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <ion-icon name="time"></ion-icon>
+                    Debut :
+                </ion-label>
+                <p>{{rdv.startTime | date:"MMM d, y, HH:mm"}}</p>
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <ion-icon name="time"></ion-icon>
+                    Fin :
+                </ion-label>
+                <p>{{rdv.endTime | date:"MMM d, y, HH:mm"}}</p>
+
+            </ion-item>
+            <ion-item>
+
+                <ion-button expand="block" fill="outline" slot="end">
+                    <ion-icon name="close-circle-outline"></ion-icon>
+                    Annuler
+                </ion-button>
+                <ion-button (click)="cancelAppointement()" expand="block" slot="end">
+                    <ion-icon name="create"></ion-icon>
+                    Supprimer
+                </ion-button>
+
+            </ion-item>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

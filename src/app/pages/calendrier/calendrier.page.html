@@ -1,0 +1,93 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button color="secondary"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            <ion-text color="light">
+                <ion-text class="fw700" color="light">Calendrier</ion-text>
+            </ion-text>
+        </ion-title>
+
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header (click)="collapseCard =!collapseCard" tappable>
+            <ion-card-title>Nouveau rendez-vous</ion-card-title>
+        </ion-card-header>
+        <ion-card-content *ngIf="collapseCard">
+            <ion-item>
+                <ion-input [(ngModel)]="event.title" placeholder="Nom patient" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input [(ngModel)]="event.desc" placeholder="Description" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input [(ngModel)]="event.telephone" placeholder="Numéro de téléphone" type="tel"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Debut</ion-label>
+                <ion-datetime [(ngModel)]="event.startTime" [min]="minDate" displayFormat="DD/MM/YYYY HH:mm "
+                              [minuteValues]="minuteValues" pickerFormat="MMM D:HH:mm"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label>Fin</ion-label>
+                <ion-datetime [(ngModel)]="event.endTime" [min]="minDate" displayFormat="DD/MM/YYYY HH:mm "
+                              [minuteValues]="minuteValues" pickerFormat="MMM D:HH:mm"></ion-datetime>
+            </ion-item>
+
+            <ion-button (click)="addEvent()" [disabled]="event.title == '' || event.desc == ''" expand="block "
+                        fill="outline">Ajouter
+                rendez-vous
+            </ion-button>
+
+        </ion-card-content>
+    </ion-card>
+    <ion-row>
+        <ion-col size="4">
+            <ion-button (click)="changeMode('month')" [color]="calendar.mode =='month' ? 'primary' : 'secondary'"
+                        expand="block">Mois
+            </ion-button>
+        </ion-col>
+        <ion-col size="4">
+            <ion-button (click)="changeMode('week')" [color]="calendar.mode =='week' ? 'primary' : 'secondary'"
+                        expand="block">Semaine
+            </ion-button>
+        </ion-col>
+        <ion-col size="4">
+            <ion-button (click)="changeMode('day')" [color]="calendar.mode =='day' ? 'primary' : 'secondary'"
+                        expand="block">Jour
+            </ion-button>
+        </ion-col>
+        <ion-col size="4" text-left>
+            <ion-button (click)="back()" fill="clear">
+                <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-col>
+        <ion-col padding-top size="4" text-center>
+            <ion-label>{{viewTitle}}</ion-label>
+        </ion-col>
+        <ion-col size="4" text-right>
+            <ion-button (click)="next()" fill="clear">
+                <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-col>
+    </ion-row>
+
+    <calendar
+            (onEventSelected)="onEventSelected($event)"
+            (onTimeSelected)="onTimeSelected($event)"
+            (onTitleChanged)="onViewTitleChanged($event)"
+            [calendarMode]="calendar.mode"
+            [currentDate]="calendar.currentDate"
+            [eventSource]="eventSource"
+            [locale]="calendar.local"
+            allDayLabel=""
+            noEventsLabel="Pas de rendez-vous aujourd'hui"
+            startingDayWeek="1">
+    </calendar>
+
+</ion-content>

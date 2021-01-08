@@ -1,0 +1,70 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Edit Profile</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="profile">
+    <ion-card no-margin>
+        <ion-card-content class="bg-profile">
+            <img alt="" src="assets/img/profil.png">
+            <h1 class="fw500">{{profil?.nom}}</h1>
+            <h2 color="light" margin-bottom>{{profil?.role}}</h2>
+            <ion-button color="secondary" icon-left>
+                <ion-icon name="photos"></ion-icon>
+                Changer/Ajouter Photo
+            </ion-button>
+        </ion-card-content>
+
+        <ion-grid fixed no-padding>
+            <ion-row>
+                <ion-col padding size="12">
+
+                    <ion-list margin-bottom>
+                        <ion-list-header color="light">
+                            <ion-label class="fw700">Form</ion-label>
+                        </ion-list-header>
+
+                        <ion-item>
+                            <ion-label color="dark" position="stacked">Nom complet:</ion-label>
+                            <ion-input [(ngModel)]="nom" placeholder="Ex..: Joe Doe" type="text"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label color="dark" position="stacked">Email:</ion-label>
+                            <ion-input [(ngModel)]="email" placeholder="Ex.: joe@doe.com"
+                                       type="email"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label color="dark" position="stacked">Telephone:</ion-label>
+                            <ion-input [(ngModel)]="telephone" placeholder="Ex.: +216" type="tel"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="dark" position="stacked">Mot de passe:</ion-label>
+                            <ion-input [(ngModel)]="CopyPassword" type="password"></ion-input>
+                            <ion-note>Taper le mot de passe pour enregistrer les modification</ion-note>
+                        </ion-item>
+
+                    </ion-list>
+
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-button (click)="update()" [disabled]="CopyPassword == ''||CopyPassword!=password" color="dark"
+                    expand="full" no-margin
+                    size="large">
+            Modifier
+        </ion-button>
+    </ion-card>
+
+    <div padding>
+        <ion-text color="dark" no-margin>
+            Vos données personnelles sont securisés
+        </ion-text>
+    </div>
+</ion-content>

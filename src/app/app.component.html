@@ -1,0 +1,74 @@
+<ion-app>
+    <ion-split-pane>
+        <ion-menu>
+            <ion-header>
+                <ion-toolbar class="user-profile" color="dark">
+
+                    <ion-item margin-bottom>
+                        <ion-avatar class="user-avatar" slot="start">
+                            <img src="assets/img/profil.png">
+                        </ion-avatar>
+                        <ion-label>
+                            <ion-text color="medium">
+                                <h1><strong>{{profil?.nom}}</strong></h1>
+                            </ion-text>
+                            <ion-text color="secondary">
+                                <h3>
+                                    {{profil?.email}} </h3>
+                            </ion-text>
+                            <ion-menu-toggle auto-hide="false" class="mto">
+                                <a (click)="goToEditProgile()" class="text08" tappable>
+                                    <ion-text color="medium">
+                                        <ion-icon name="contact"></ion-icon>
+                                        <strong>Editier profil</strong>
+                                    </ion-text>
+                                </a>
+                                <ion-text color="secondary"> |</ion-text>
+                                <a (click)="logout()" class="text08" tappable>
+                                    <ion-text color="medium">
+                                        <ion-icon name="log-out"></ion-icon>
+                                        <strong>Déconnexion</strong>
+                                    </ion-text>
+                                </a>
+                            </ion-menu-toggle>
+                        </ion-label>
+                    </ion-item>
+
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content class="bg-profile">
+                <ion-list>
+                    <ion-list-header color="dark">
+                        <ion-label>Menu</ion-label>
+                    </ion-list-header>
+
+                    <ion-menu-toggle *ngFor="let p of appPages" auto-hide="false">
+                        <ion-item [routerLink]="[p.url]" color="primary">
+                            <ion-icon [name]="p.icon" color="light" slot="start"></ion-icon>
+                            <ion-label>
+                                {{p.title}}
+                            </ion-label>
+                        </ion-item>
+
+                    </ion-menu-toggle>
+
+                </ion-list>
+            </ion-content>
+            <div *ngIf="authService.isServeur">
+                <ion-footer>
+                    <ion-menu-toggle>
+                        <ion-item (click)="switch()" color="primary">
+                            <ion-icon color="light" name="swap" slot="start"></ion-icon>
+                            <ion-label>
+                                switch
+                            </ion-label>
+                        </ion-item>
+                    </ion-menu-toggle>
+
+                </ion-footer>
+            </div>
+        </ion-menu>
+        <ion-router-outlet main></ion-router-outlet>
+    </ion-split-pane>
+</ion-app>
